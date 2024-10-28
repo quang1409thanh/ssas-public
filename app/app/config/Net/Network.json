@@ -1,0 +1,127 @@
+{
+  "class": "Net",
+  "Modules": [
+    {
+      "name": "DoIp",
+      "class": "DoIp",
+      "discovery": "224.244.224.245:13400",
+      "max_connections" : 3,
+      "targets": [
+        {
+          "name": "P2P",
+          "address": "0xdead"
+        },
+        {
+          "name": "GW_P2P",
+          "address": "0xcaaa"
+        },
+        {
+          "name": "GW_P2A",
+          "address": "0xcaab"
+        }
+      ],
+      "routines": [
+        {
+          "name": "default",
+          "number": "0xda",
+          "targets": ["P2P", "GW_P2P", "GW_P2A"]
+        }
+      ],
+      "testers" : [
+        {
+          "name": "default",
+          "address": "0xbeef",
+          "routines": ["default"]
+        }
+      ]
+    },
+    {
+      "name": "SomeIp",
+      "class": "SomeIp",
+      "SD": {
+        "hostname" : "ssas",
+        "multicast" : "224.244.224.245"
+      },
+      "servers": [
+        {
+          "name": "server0",
+          "service":"0x1234",
+          "instance":"0x5678",
+          "clientId":"0x4444",
+          "unreliable":"30560",
+          "methods": [
+            {
+              "name" : "method1",
+              "methodId" : "0x421",
+              "tp": true,
+              "version" : "0"
+            }
+          ],
+          "event-groups": [
+            {
+              "name": "event_group1",
+              "groupId": "0x8001",
+              "enable_multicast": false,
+              "events": [
+                {
+                  "name" : "event0",
+                  "eventId": "0xbeef",
+                  "tp": true,
+                  "version" : "0"
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "clients": [
+        {
+          "name": "client0",
+          "service":"0xabcd",
+          "instance":"0xbeef",
+          "clientId":"0x5555",
+          "unreliable":"30568",
+          "methods": [
+            {
+              "name" : "method2",
+              "methodId" : "0x424",
+              "tp": true,
+              "version" : "0"
+            }
+          ],
+          "event-groups": [
+            {
+              "name": "event_group2",
+              "groupId": "0x8002",
+              "enable_multicast": false,
+              "events": [
+                {
+                  "name" : "event0",
+                  "eventId": "0xabcd",
+                  "tp": true,
+                  "version" : "0"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "SoAd",
+      "class": "SoAd",
+      "sockets": [
+        {
+          "name": "UDPNM_CHL0",
+          "type": "server",
+          "server": "224.244.224.245:12345",
+          "protocol": "UDP",
+          "multicast": true,
+          "up": "UdpNm",
+          "RxPduId": "UDPNM_RX_PID_CHL0",
+          "AutomaticSoConSetup": true
+        }
+      ]
+    }
+  ]
+}

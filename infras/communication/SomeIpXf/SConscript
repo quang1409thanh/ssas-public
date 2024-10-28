@@ -1,0 +1,13 @@
+from building import *
+
+CWD = GetCurrentDir()
+objs = Glob('*.c')
+
+
+@register_library
+class LibrarySomeIpXf(Library):
+    def config(self):
+        self.CPPDEFINES = []
+        self.CPPPATH = ['$INFRAS', CWD]
+        self.source = objs
+

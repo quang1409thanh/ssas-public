@@ -1,0 +1,31 @@
+from building import *
+
+objs = Glob('src/*.c') + Glob('src/*.cpp')
+
+
+@register_library
+class LibrarySimulator(Library):
+    def config(self):
+        self.LIBS = ['CanLib', 'RS232', 'DevLib', 'Utils']
+        if not IsBuildForAndroid():
+            self.LIBS.append('pthread')
+        self.CPPPATH = ['$INFRAS']
+        self.source = objs
+
+
+objsFlsAc = Glob('src/FlsAc.c') + Glob('src/critical.c')
+
+
+@register_library
+class LibraryFlsAc(Library):
+    def config(self):
+        self.CPPPATH = ['$INFRAS']
+        self.source = objsFlsAc
+
+objsCritical = Glob('src/critical.c')
+
+@register_library
+class LibraryCritical(Library):
+    def config(self):
+        self.CPPPATH = ['$INFRAS']
+        self.source = objsCritical
